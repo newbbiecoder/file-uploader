@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title><%= locals.user ? "HomePage" : "Log In" %></title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <% if(locals.user) { %>
+            <h1>Welcome back <%= user.fullname %></h1>
+        <% } else { %>
+            <h1>Please log in</h1>
+            <form action="/log-in" method="POST">
+                <% if(locals.errMessage) { %>
+                    <p><%= errMessage %></p>
+                <% } %>
+                <label for="username">Username</label>
+                <input id="username" name="username" placeholder="username" type="text" />
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" />
+
+                <button type="submit">Log In</button>
+
+                <a href="/sign-up">Sign Up?</a>
+            </form>
+        <% } %>
+    </body>
+</html>

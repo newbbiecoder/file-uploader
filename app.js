@@ -5,6 +5,8 @@ const passport = require("passport");
 const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
 
+const CustomNotFoundError = require('./errors/CustomNotFoundError');
+
 const {PrismaPg} = require('@prisma/adapter-pg');
 const {PrismaClient} = require("./generated/prisma/client");
 const {PrismaSessionStore} = require("@quixo3/prisma-session-store")
@@ -48,6 +50,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(indexRouter);
+
+app.use((req, res, next) => {
+    throw new CustomNotFoundError("Trying to be cheeky eh O_O");
+})
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.statusCode || 500).send(`${err.name}: ${err.message}`);
+});
 
 app.listen(3000, (error) => {
     if(error) {

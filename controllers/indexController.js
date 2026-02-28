@@ -3,6 +3,37 @@ const bcrypt = require("bcryptjs");
 const {body, validationResult, matchedData} = require("express-validator");
 const passport = require("passport");
 
+async function logInIndexPageGet(req, res, next) {
+    try {
+        res.render("index", {
+            user: req.user
+        })
+    } catch(err) {
+        return next(err);
+    }
+}
+
+async function authenticateUser(req, res, next) {
+    try {
+        passport.authenticate("local", function(err, user, info) {
+            if(err) {return next(err)}
+            if(!user) {
+                return res.render('index', {
+                    title: "HomePage",
+                    user: req.user,
+                    errMessage: info.message
+                })
+            }
+            req.logIn(user, function(err) {
+                if(err) return next(err);
+                return res.redirect('/')
+            })
+        })(req, res, next)
+    } catch(err) {
+        return next(err);
+    }
+}
+
 function signUpPageGet(req, res, next) {
     try {
         res.render("sign-up-form", {
@@ -59,6 +90,8 @@ let signUpPagePost = [
 ]
 
 module.exports = {
+    logInIndexPageGet,
+    authenticateUser,
     signUpPageGet,
     signUpPagePost,
 }
