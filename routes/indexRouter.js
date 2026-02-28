@@ -1,7 +1,8 @@
 const {Router} = require("express");
-
+const {signUpPageGet, signUpPagePost} = require("../controllers/indexController");
 const indexRouter = Router();
 
-indexRouter.get("/", (req, res) => res.send("HELLOOOOOOOOOOOOOOOOO"));
+indexRouter.get("/sign-up", signUpPageGet);
+indexRouter.post("/sign-up", signUpPagePost);
 
 module.exports = indexRouter;

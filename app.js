@@ -6,7 +6,7 @@ const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
 
 const {PrismaPg} = require('@prisma/adapter-pg');
-const {PrismaClient} = require("@prisma/client");
+const {PrismaClient} = require("./generated/prisma/client");
 const {PrismaSessionStore} = require("@quixo3/prisma-session-store")
 
 const connectionString = `${process.env.DATABASE_URL}`;
@@ -40,6 +40,12 @@ app.use(expressSession({
         }
     )
 }));
+
+// Require passport config
+require("./config/passport");
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(indexRouter);
 
