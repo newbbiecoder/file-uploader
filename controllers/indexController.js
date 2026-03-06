@@ -89,9 +89,23 @@ let signUpPagePost = [
     }
 ]
 
+function logOutGet(req, res, next) {
+    try {
+        req.logOut((err) => {
+            if(err) {
+                return next(err);
+            }
+            res.redirect("/");
+        })
+    } catch(err) {
+        return next(err);
+    }
+}
+
 module.exports = {
     logInIndexPageGet,
     authenticateUser,
     signUpPageGet,
     signUpPagePost,
+    logOutGet,
 }

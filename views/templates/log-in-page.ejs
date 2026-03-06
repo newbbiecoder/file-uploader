@@ -1,0 +1,43 @@
+<div class="container">
+    <main>
+        <section class="header">
+            <div>
+                <img src="/assets/icons/cloud-icon.svg" alt="cloud-icon">
+                <p>CloudVault</p>
+            </div>
+            <p>Your secure gateway to the cloud</p>
+        </section>
+
+        <section class="log-in">
+            <div class="log-in-header">
+                <h3>Log In</h3>
+                <p>Enter your credentials to access your files</p>
+            </div>
+            <form action="/log-in" method="POST">
+                <% if(locals.errMessage) { %>
+                    <p><%= errMessage %></p>
+                <% } %>
+
+                <div>
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <img src="/assets/icons/@icon.svg" class="field-icon">
+                        <input id="username" name="username" placeholder="username" type="text"/>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <img src="/assets/icons/lock-icon.svg" class="field-icon">
+                        <input id="password" name="password" type="password" placeholder="password"/>
+                    </div>
+                </div>
+
+                <button type="submit">Log In</button>
+            </form>
+            <p>Don't have an account? <span><a href="/sign-up">Create account</a></span></p>
+        </section>
+
+    </main>
+</div>
