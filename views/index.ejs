@@ -5,8 +5,7 @@
     </head>
     <body>
         <% if(locals.user) { %>
-            <h1>Welcome back <%= user.fullname %></h1>
-            <a href="/log-out">LOG OUT</a>
+            <%- include("./templates/dashboard.ejs") %>
         <% } else { %>
             <%- include("./templates/log-in-page.ejs") %>
         <% } %>

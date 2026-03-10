@@ -55,12 +55,14 @@ app.use((req, res, next) => {
     throw new CustomNotFoundError("Trying to be cheeky eh O_O");
 })
 
-// Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(err.statusCode || 500).send(`${err.name}: ${err.message}`);
-});
+  if (!(err instanceof CustomNotFoundError)) {
+    console.error(err);
+  }
 
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).send(`${err.name}: ${err.message}`);
+});
 app.listen(3000, (error) => {
     if(error) {
         throw error;

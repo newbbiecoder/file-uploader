@@ -9,10 +9,8 @@ html, body {
     margin: 0;
 }
 
-body {
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+.container {
+    height: 100%;
     background: #F9FAFBFF;
 }
 
@@ -135,3 +133,240 @@ section.log-in {
     }
 }
 
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    height: 100%;
+}
+
+.sidebar {
+    background: #FAFAFBFF;
+    height: 100%;
+    
+    .app-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        img {
+            height: 30;
+            width: 30;
+            background-color: #1F8CF9FF;
+            padding: 0.5rem;
+            border-radius: 12px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    }
+
+    .upload-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        button:first-child {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+
+            background-color: #258CF4FF;
+            border: none;
+            padding: 0.5rem 4rem 0.5rem 1rem;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+
+            svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+        button:first-child:hover {
+            background-color: rgb(4, 111, 217);
+        }
+
+        button:last-child {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            
+            background-color: white;
+            border: 1px solid grey;
+            padding: 0.5rem 4rem 0.5rem 1rem;
+            border-radius: 6px;
+            color: black;
+            font-size: 0.9rem;
+            cursor: pointer;
+
+            svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+        button:last-child:hover {
+            background-color: rgb(239, 239, 239);
+        }
+    }
+
+    .folders {
+        margin-top: 1.5rem;
+        div {
+            display: flex;
+            gap: 0.7rem;
+            margin-left: 15px;
+            cursor: pointer;
+
+            svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+
+        div.active {
+            color: #258CF4FF;
+            background: #258CF41A;
+            padding: 0.5rem 1rem 0.5rem 1rem;
+            border-radius: 8px;
+        }
+    }
+}
+
+.files-section {
+    .user-info {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1.5rem;
+        margin-right: 2rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+
+        img {
+            height: 45px;
+            width: 45px;
+            border-radius: 11px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #565D6DFF;
+
+            svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+    }
+
+    hr {
+    border: 0;
+        border-top: 2px solid lightgrey;
+        opacity: 1;
+    }
+}
+
+.category-table {
+    margin-top: 4rem !important;
+    margin-right: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    border: 1px solid rgb(186, 181, 181);
+    overflow: hidden;
+    width: 100%;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.85rem;
+
+    form {
+        margin-bottom: 0;
+    }
+
+    button {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+
+    img {
+        cursor: pointer;
+    }
+}
+
+th {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+    background: #F3F4F666;
+    color: black;
+}
+
+td, th {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th:last-child, td:last-child {
+    text-align: center;
+}
+
+.header-info, .category-table {
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .destination {
+        font-size: 1.5rem;
+
+        span {
+            color: grey;
+        }
+    }
+
+    .file-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        p:first-child{
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        p:last-child {
+            margin-right: 4.8rem;
+            color: rgb(76, 76, 76);
+            background: #F3F4F64D;
+            padding: 0.5rem 1rem 0.5rem 1rem;
+            border: 1px solid rgb(139, 139, 139);
+            border-radius: 11px;
+        }
+    }
+}
