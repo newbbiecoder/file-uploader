@@ -25,4 +25,15 @@ model Users {
   username String @unique @db.VarChar(255)
   fullname String @db.VarChar(255)
   password String @db.VarChar(255)
+  files Files[]
+}
+
+model Files {
+  id Int @id @default(autoincrement())
+  originalName String
+  size Int
+  date DateTime @default(now())
+
+  userId Int
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

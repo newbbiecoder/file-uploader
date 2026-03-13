@@ -38,6 +38,7 @@
     </section>
     <section class="files-section">
         <div class="user-info">
+            <p><%= user.fullname %></p>
             <img src="/assets/my-photo.jpeg" alt="my-photu">
             <a class="logout-btn" href="/log-out">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 20H6C4.89543 20 4 19.1046 4 18L4 6C4 4.89543 4.89543 4 6 4H14M10 12H21M21 12L18 15M21 12L18 9" stroke="#565D6DFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
@@ -69,25 +70,27 @@
                 <tbody>
                     <% if(typeof files !== 'undefined' && files.length > 0) { %>
                         <% files.forEach(file => { %>
-                            <tr>
-                                <td>
-                                    <%= file.originalname %>
-                                </td>
-                                <td><%= file.size %></td>
-                                <td><%= date %></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <form method="POST">
-                                            <button type="submit">
-                                                <img src="/assets/icons/delete-icon.png" alt="delete-item" height="25">
-                                            </button>
-                                        </form>
-                                        <a>
-                                            <img src="/assets/icons/edit-icon.png" alt="edit-icon" height="25">
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            <% if(file.userId === user.id) { %>
+                                <tr>
+                                    <td>
+                                        <%= file.originalName %>
+                                    </td>
+                                    <td><%= file.size %></td>
+                                    <td><%= file.date %></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <form method="POST">
+                                                <button type="submit">
+                                                    <img src="/assets/icons/delete-icon.png" alt="delete-item" height="25">
+                                                </button>
+                                            </form>
+                                            <a>
+                                                <img src="/assets/icons/edit-icon.png" alt="edit-icon" height="25">
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% } %>
                         <% }) %>
                     <% } %>
                 </tbody>

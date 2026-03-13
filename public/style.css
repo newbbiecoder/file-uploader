@@ -244,10 +244,17 @@ section.log-in {
     .user-info {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         gap: 1.5rem;
         margin-right: 2rem;
         margin-bottom: 0.5rem;
         margin-top: 0.5rem;
+
+        p:first-child {
+            text-transform: capitalize;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
 
         img {
             height: 45px;

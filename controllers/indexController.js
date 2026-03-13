@@ -7,19 +7,14 @@ const fileArr = [];
 
 async function logInIndexPageGet(req, res, next) {
     try {
-        const today = new Date();
-        let mm = today.getMonth() + 1;
-        let dd = today.getDate();
-        if (dd < 10) dd = '0' + dd;
-        if (mm < 10) mm = '0' + mm;
-        const formattedToday = dd + '/' + mm + '/' + today.getFullYear();
-
-        console.log(fileArr)
+        const {rows} = await pool.query(`
+            SELECT "id", "originalName", "size", TO_CHAR(date, 'DD/MM/YYYY') as date, "userId"
+            FROM "Files"
+        `);
 
         res.render("index", {
             user: req.user,
-            files: fileArr,
-            date: formattedToday
+            files: rows
         });
     } catch(err) {
         return next(err);
@@ -29,7 +24,10 @@ async function logInIndexPageGet(req, res, next) {
 async function uploadFilePost(req, res, next) {
     try {
         if (req.file) {
-            fileArr.push(req.file);
+            console.log(req.file);
+            await pool.query(`
+                INSERT INTO "Files" ("originalName", "size", "userId") VALUES($1, $2, $3)
+            `, [req.file.originalname, req.file.size, req.user.id])
         }
         res.redirect("/"); 
     } catch (err) {
