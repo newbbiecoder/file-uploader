@@ -219,25 +219,11 @@ section.log-in {
 
     .folders {
         margin-top: 1.5rem;
-        div {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            margin-left: 15px;
-            cursor: pointer;
+    }
 
-            svg {
-                height: 20px;
-                width: 20px;
-            }
-        }
-
-        div.active {
-            color: #258CF4FF;
-            background: #258CF41A;
-            padding: 0.5rem 1rem 0.5rem 1rem;
-            border-radius: 8px;
-        }
+    .folders .active {
+        color: #258CF4FF !important;
+        background: #258CF41A !important;
     }
 }
 

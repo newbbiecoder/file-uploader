@@ -7,6 +7,8 @@ const {
     uploadFilePost,
     uploadFolderPost,
     openFolderGet,
+    deleteFolderPost,
+    deleteFilePost,
     authenticateUser, 
     logOutGet 
 } = require("../controllers/indexController");
@@ -29,10 +31,12 @@ const upload = multer({ storage: storage });
 indexRouter.get("/", logInIndexPageGet);
 
 indexRouter.post("/upload", upload.single('fileInput'), uploadFilePost);
+indexRouter.post("/file/:id/delete", deleteFilePost);
 
 indexRouter.post("/add-folder", uploadFolderPost);
 
 indexRouter.get("/folder/:id", openFolderGet);
+indexRouter.post("/folder/:id/delete", deleteFolderPost);
 
 indexRouter.get("/sign-up", signUpPageGet);
 indexRouter.post("/sign-up", signUpPagePost);

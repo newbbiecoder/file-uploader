@@ -4,7 +4,7 @@ const {body, validationResult, matchedData} = require("express-validator");
 const passport = require("passport");
 
 const prisma = require("../lib/prisma.cjs");
-const { parse } = require("dotenv");
+require("dotenv");
 async function logInIndexPageGet(req, res, next) {
     try {
         const userId = req.user.id;
@@ -135,6 +135,46 @@ async function openFolderGet(req, res, next) {
     }
 }
 
+async function deleteFolderPost(req, res, next) {
+    try {
+        const folderId = parseInt(req.params.id);
+        await prisma.folders.delete({
+            where: {
+                id: folderId
+            }
+        })
+
+        res.redirect('back')
+
+    }
+    catch(err) {
+        return next(err)
+    }
+}
+
+async function deleteFilePost(req, res, next) {
+    try {
+        const fileId = parseInt(req.params.id);
+        const folderId = req.body.folderId;
+
+        await prisma.files.delete({
+            where: {
+                id: fileId
+            }
+        })
+
+        if(folderId !== '') {
+            res.redirect(`/folder/${folderId}`);
+        }
+        else {
+            res.redirect("/");
+        } 
+    }
+    catch(err) {
+        return next(err);
+    }
+}
+
 async function authenticateUser(req, res, next) {
     try {
         passport.authenticate("local", function(err, user, info) {
@@ -231,6 +271,8 @@ module.exports = {
     signUpPagePost,
     uploadFilePost,
     uploadFolderPost,
+    deleteFolderPost,
+    deleteFilePost,
     openFolderGet,
     logOutGet,
 }
